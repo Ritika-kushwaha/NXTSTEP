@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NXTSTEP</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .section {
+            padding: 110px;
+            text-align: center;
+        }
+
+        /* Header Section */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background : linear-gradient(180deg, #b93165,#6a11cb);
+            padding: 10px 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .header-section .logo img {
+            width: 100px;
+        }
+
+        .header-section nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #090507;
+            font-weight: bold;
+        }
+
+        .header-section nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Section */
+        .main-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .main-section p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .main-links .button {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #b93165;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .main-links .button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Section */
+        .footer-section {
+            background-color: #f4f4f4;
+            border-top: 2px solid #ddd;
+        }
+
+        .footer-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: -5px;
+            margin-top: -70px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li {
+            margin: 2px 0;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #b93165;
+            font-weight: bold;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="section header-section">
+        <div class="logo">
+            <img src="nxtsteplogo.jpg" alt="NXTSTEP Logo">
+        </div>
+        <nav>
+            <a href="#contact">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <main class="section main-section">
+        <h1>Welcome to NXTSTEP</h1>
+        <p>Your Journey to Success Starts Here</p>
+        <div class="main-links">
+            <a href="#career-test" class="button" id="career-test-btn">Take a Career Test</a>
+            <a href="#explore-career" class="button">Explore Career Path</a>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="section footer-section">
+        <h2>Features of NXTSTEP</h2>
+        <ul>
+            <li>Comprehensive Career Tests</li>
+            <li>Guidance on Career Paths</li>
+            <li>Exclusive Resources</li>
+        </ul>
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Alert for "Take a Career Test" button
+        document.getElementById('career-test-btn').addEventListener('click', function() {
+            alert('Redirecting to the Career Test page...');
+        });
+    </script>
+</body>
+</html>
