@@ -13,7 +13,7 @@ interface Career {
   imageUrl: string;
   
 }
-//what
+
 const careerOptions: Career[] = [
   { title: 'Doctor', description: 'Diagnoses and treats medical conditions.', howTo: 'Pass NEET, pursue MBBS/MD.', salary: '₹5-30 LPA', link: 'https://www.google.com/search?q=doctor+career', imageUrl: 'https://www.future-doctor.de/wp-content/uploads/2024/08/shutterstock_2480850611.jpg' },
   //{ title: 'Engineer', description: 'Designs and builds technical solutions.', howTo: 'Pass JEE, complete B.Tech.', salary: '₹4-20 LPA', link: 'https://www.google.com/search?q=engineer+career', imageUrl: 'https://placehold.co/600x400/6a11cb/ffffff?text=Engineer' },
