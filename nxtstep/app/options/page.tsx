@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+
 
 // Define the structure for a career option
 interface Career {
@@ -59,92 +60,221 @@ export default function CareerOptionsPage() {
   const [showPopup, setShowPopup] = useState(false);
   const [popupData, setPopupData] = useState<Career | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const scrollContainerRef = useRef(null);
 
   const handleShowPopup = (career: Career) => {
     setPopupData(career);
     setShowPopup(true);
   };
 
-  const handleClosePopup = () => {
+ const handleClosePopup = () => {
     setShowPopup(false);
     setPopupData(null);
   };
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
 
-  const filteredCareers = careerOptions.filter(career =>
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
+
+
+ const filteredCareers = careerOptions.filter(career =>
     career.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+ );
 
   return (
-    <div className="font-sans min-h-screen bg-[#2F4156] flex flex-col">
-      {/* Header Section */}
-      <header className="text-[#FFFFFF] p-4 flex flex-col sm:flex-row justify-between items-center rounded-b-xl shadow-lg sticky top-0 z-10 bg-[#2F4156]">
-        <h1 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-0">NXTSTEP - Career Options</h1>
-        <div className="flex w-full sm:w-auto">
-          <input
-            type="text"
-            id="searchBar"
-            placeholder="Search career options..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full sm:w-auto p-2 text-base rounded-l-md focus:outline-none focus:ring-2 focus:[#310E10] text-[#F5EFEB]"
-          />
-          <button onClick={() => {}} className="bg-[#2F4156] hover:bg-[#567CBD] text-[#FFFFFF] p-2 rounded-r-md transition duration-200">
-            Search
-          </button>
-        </div>
-      </header>
+    <div className="bg-[#fefcf5] text-gray-800 font-inter">
+    {/* Hero Section Container */}
+            <div className="relative min-h-screen">
+                {/* Background elements (blobs and shapes) */}
+                <div className="bg-[#210440] absolute inset-0 z-0">
+                    <div className="absolute -top-10 -left-10 w-96 h-96 bg-[#E5958E] rounded-full  filter  opacity-100 animate-blob"></div>
+                    <div className="absolute top-90 right-50 w-80 h-80 bg-[#E5958E] rounded-full  filter opacity-100 animate-blob animation-delay-2000"></div>
+                    <div className="absolute top-200 right-20 w-60 h-60 bg-[#E5958E] rounded-full  filter opacity-100 animate-blob animation-delay-2000"></div>
+                    <div className="absolute top-0 right-0 w-80 h-80 bg-[#E5958E] rounded-full  filter opacity-100 animate-blob animation-delay-2000"></div>
+                    <div className="absolute top-240 right70 w-80 h-80 bg-[#E5958E] rounded-full  filter opacity-100 animate-blob animation-delay-2000"></div>
+                </div>
 
-      {/* Main Content Section */}
-      <main className="bg-gradient-to-r from-[#C8D9E6] to-[#567C8D] flex-grow overflow-y-auto flex justify-center">
-        <div className="w-full max-w-7xl px-5 py-8">
-            <h2 className="text-2xl font-bold text-[#FFFFFF] mb-6 text-center">Browse Career Options</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 justify-items-center">
-            {filteredCareers.map((career) => (
+                {/* Navbar */}
+                <nav className="bg-[#210440] relative z-10 flex justify-between items-center p-4 md:p-8 max-w-7xl mx-auto">
+                    <div className="flex items-center space-x-2">
+                        <img src="https://placehold.co/40x40/F1AA9B/white?text=N" alt="Foody Logo" className="rounded-full"/>
+                        <span className="text-2xl font-bold text-[#F1AA9B]">NXTSTEP</span>
+                    </div>
+                    <div className="hidden md:flex items-center space-x-6">
+                        <a href="#" className="font-medium text-[#F1AA9B] hover:text-orange-500 transition-colors">Home</a>
+                        <a href="#" className="font-medium text-[#F1AA9B] hover:text-orange-500 transition-colors">About</a>
+                        <a href="#" className="font-medium text-[#F1AA9B] hover:text-orange-500 transition-colors">Form</a>
+                        <a href="#" className="font-medium text-[#F1AA9B] hover:text-orange-500 transition-colors">Options</a>
+                        <a href="#" className="font-medium text-[#F1AA9B] hover:text-orange-500 transition-colors">Services</a>
+                        <a href="#" className="font-medium text-[#F1AA9B] hover:text-orange-500 transition-colors">S</a>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white cursor-pointer hover:text-gray-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input
+                        type="text"
+                        id="searchBar"
+                        placeholder="Search career options..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full sm:w-auto p-2 text-base rounded-l-md focus:outline-none focus:ring-2 focus:[#310E10] text-[#F5EFEB]"
+                        />
+
+                        <button onClick={() => {}} className="px-4 py-2 border border-white text-white text-sm font-semibold rounded-full hover:bg-[#F1AA9B] transition-colors hidden sm:block">Sign in</button>
+                    </div>
+                </nav>
+
+                {/* Main content area */}
+                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 mt-12 md:mt-24">
+                    {/* Left content (Text) */}
+                    <div className="w-full md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl  leading-tight text-white mb-6">
+                            <span className=" text-[#F1AA9B] font-extrabold ">Choose Path</span> for Yourself <span className=" text-[#F1AA9B] font-extrabold">with NXTSTEP</span> 
+                        </h1>
+                        <p className="text-lg text-[#a3736a] mb-8 max-w-md mx-auto md:mx-0">
+                            Discover your ideal career path with NXTSTEP. Explore diverse options, find your passion, and take the first step towards a fulfilling future.
+                        </p>
+                        <div className="flex items-center justify-center md:justify-start space-x-4">
+                          <input
+                        type="text"
+                        id="searchBar"
+                        placeholder="Search career options..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full sm:w-auto p-2 text-base rounded-l-md focus:outline-none focus:ring-2 focus:[#310E10] text-[#F5EFEB]"
+                        />
+
+                            <button onClick={() => {}} className="px-6 py-3 bg-[#FFBA00] text-white font-bold rounded-full shadow-lg hover:bg-[#6f5202] transition-colors transform hover:scale-105">
+                                Explore Now
+                            </button>
+                            
+                        </div>
+                    </div>
+                    {/* Right content (Image and info cards) */}
+                    <div className="relative w-full md:w-1/2 flex justify-center mt-8 md:mt-0">
+                        <img src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/251274e8-7340-40cf-bbca-ac2d588123d8" alt="Career" className="w-full max-w-md rounded-full shadow-2xl relative z-10"/>
+                        
+  
+                        {/* Info cards */}
+                        <div className="absolute top-1/2 -left-10 transform -translate-y-1/2 bg-white/70 backdrop-blur-md rounded-2xl p-4 shadow-lg flex flex-col space-y-4 z-20 hidden lg:flex">
+                            <div className="flex items-center space-x-4">
+                                <div className="p-3 bg-orange-100 rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p className="font-bold"></p>
+                                    <p className="text-sm text-gray-600"></p>
+                                </div>
+                            </div>
+                            <div className="flex items-center space-x-4">
+                                <div className="p-3 bg-green-100 rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c1.657 0 3 .895 3 2s-1.343 2-3 2-3-.895-3-2 1.343-2 3-2zM8 20h8a2 2 0 002-2V6a2 2 0 00-2-2H8a2 2 0 00-2 2v12a2 2 0 002 2zM9 16h6v-2H9v2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p className="font-bold"></p>
+                                    <p className="text-sm text-gray-600"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div className="max-w-7xl mx-auto py-10">
+              <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-[#F1AA9B]"> Future-Proof Careers</h1>
+              <p className="text-center text-lg md:text-xl text-[#F1AA9B] mb-12">
+                Explore high-growth careers in technology and innovation.
+              </p>
+
+                {/* cards section */}
+              <div className="relative mt-10">
+                <div className="absolute top-1/2 left-0 right-0 z-10 flex justify-between transform -translate-y-1/2 px-4 md:px-0">
+                {/* Navigation arrows */}
+                  <button
+                    onClick={scrollLeft}
+                    className="p-3 bg-[#f59683] rounded-full shadow-lg border border-[#F1AA9B] hover:bg-[#f59683] transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#f36e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={scrollRight}
+                    className="p-3 bg-[#f59683] rounded-full shadow-lg border border-[#F1AA9B] hover:bg-[#f59683] transition-colors"
+                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#f36e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                 </button>
+                </div>
+                    
+              <div
+                ref={scrollContainerRef}
+                className="grid grid-flow-col auto-cols-[85%] sm:auto-cols-[45%] md:auto-cols-[30%] gap-6 py-19 overflow-x-auto scrollable-container scroll-smooth"
+              >    {/* Card 1 */}
+                {filteredCareers.map((career) => (
                 <div
-                key={career.title}
-                className="career-box bg-[#FFFFFF] text-center rounded-xl shadow-lg cursor-pointer transition-all duration-300 ease-in-out hover:scale-200 hover:shadow-2xl hover:bg-gradient-to-br from-[#567C8D] to-[#C8D9E6] hover:text-[#FFFFFF] w-full sm:w-60 overflow-hidden flex flex-col"
-                onClick={() => handleShowPopup(career)}
+                  key={career.title}
+                  className="career-box bg-white text-center rounded-xl shadow-lg cursor-pointer transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-br from-[#F1AA9B] to-[#C8D9E6] hover:text-white flex flex-col overflow-hidden"
+                  onClick={() => handleShowPopup(career)}
                 >
-                <img src={career.imageUrl} alt={career.title} className="w-full h-40 object-cover rounded-t-xl" />
-                <div className="bg-[#2F4156] p-4 flex-grow flex items-center justify-center">
-                    <h3 className="font-semibold text-lg">{career.title}</h3>
+                  <img src={career.imageUrl} alt={career.title} className="w-full h-70 object-cover rounded-t-xl" />
+                  <div className="bg-[#F1AA9B] p-4 flex-grow flex items-center justify-center">
+                    <h3 className="font-semibold text-lg text-white">{career.title}</h3>
+                  </div>
                 </div>
-                </div>
-            ))}
+                ))}
+              </div>
+             </div>
             </div>
+                        
+            {showPopup && popupData && (
+            <>
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+                <div className="bg-white rounded-xl shadow-xl w-11/12 md:w-1/2 lg:w-1/3 p-6 text-[#2F4156] relative">
+                  <button onClick={handleClosePopup} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                  <h2 className="text-2xl font-bold mb-2 text-[#F1AA9B]">{popupData.title}</h2>
+                  <p className="mb-4 text-gray-700">{popupData.description}</p>
+                  <div className="space-y-4 text-sm">
+                    <p>
+                      <strong className="text-[#2F4156]">How to Pursue:</strong> {popupData.howTo}
+                    </p>
+                    <p>
+                      <strong className="text-[#2F4156]">Salary Range:</strong> {popupData.salary}
+                    </p>
+                    <a
+                      href={popupData.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#F1AA9B] hover:underline block mt-4 font-semibold"
+                    >
+                     To know more, click here
+                    </a>
+                  </div>
+                </div>
+              </div>
+              </>
+            )}
+                
+            
         </div>
-      </main>
-
-      {/* Popup and Overlay */}
-      {showPopup && popupData && (
-        <>
-          <div className="fixed inset-0 bg-neutral-900 bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out opacity-100" onClick={handleClosePopup}></div>
-          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#F5EFEB] p-6 rounded-2xl shadow-2xl z-50 w-[90%] max-w-md transition-transform duration-300 ease-in-out scale-100">
-            <h2 className="text-gray-900 text-2xl font-bold mb-4">{popupData.title}</h2>
-            <p className="text-gray-700 mb-2">{popupData.description}</p>
-            <p className="text-gray-700 mb-2">
-              <strong className="text-gray-900">How to Pursue:</strong> {popupData.howTo}
-            </p>
-            <p className="text-gray-700 mb-4">
-              <strong className="text-gray-900">Salary Range:</strong> {popupData.salary}
-            </p>
-            <a
-              href={popupData.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#56768D] hover:underline mb-4 block"
-            >
-              To know more, click here
-            </a>
-            <button
-              onClick={handleClosePopup}
-              className="mt-4 w-full py-2 bg-gradient-to-r from-[#2F4156] to-[#C8D9E6] text-[#FFFFFF] font-semibold rounded-md shadow-lg hover:from-[#C8D9E6] hover:to-[#2F4156] transition duration-200"
-            >
-              Close
-            </button>
-          </div>
-        </>
-      )}
     </div>
-  );
+    );
 }
+
+{/* export default CareerOptionsPage; */}
+
